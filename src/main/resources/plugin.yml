@@ -1,0 +1,13 @@
+name: Infection
+version: '${project.version}'
+main: grapeapplefruit.main.Main
+api-version: 1.18
+commands:
+  start:
+    description: Start the game!
+    permission: op
+  end:
+    description: End the game.
+    permission: op
+  basic:
+    description: Get the basic kit.
