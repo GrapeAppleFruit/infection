@@ -8,9 +8,13 @@ public final class Main extends JavaPlugin {
     public void onEnable() {
         getCommand("start").setExecutor(new Game());
         getCommand("end").setExecutor(new Game());
-        getCommand("basic").setExecutor(new Kits());
-        getServer().getPluginManager().registerEvents(new Kits(), this);
+        getCommand("basic").setExecutor(new Game());
+        getCommand("help").setExecutor(new HelpCommand());
         getServer().getPluginManager().registerEvents(new Game(), this);
+        System.out.println(" ====================  ");
+        System.out.println("    Infection v1.0      ");
+        System.out.println("  By GrapeAppleFruit   ");
+        System.out.println(" ====================  ");
 
     }
 
