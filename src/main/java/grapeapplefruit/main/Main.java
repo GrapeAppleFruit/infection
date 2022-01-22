@@ -1,40 +1,29 @@
 package grapeapplefruit.main;
 
-import grapeapplefruit.main.gameevents.AllPlayersInf;
-import grapeapplefruit.main.gameevents.InfHitInf;
-import grapeapplefruit.main.gameevents.InfectionHit;
-import grapeapplefruit.main.infgui.Gui;
-import grapeapplefruit.main.infgui.GuiListener;
-import grapeapplefruit.main.infgui.KitGui;
-import grapeapplefruit.main.infgui.KitGuiListener;
-import grapeapplefruit.main.kitcommands.BasicKitCommand;
-import grapeapplefruit.main.gamecommands.EndGameCommand;
-import grapeapplefruit.main.gamecommands.StartGameCommand;
-import grapeapplefruit.main.kitcommands.StoneKitCommand;
+import grapeapplefruit.main.cmds.HelpCommand;
+import grapeapplefruit.main.cmds.JoinCommand;
+import grapeapplefruit.main.cmds.LeaveCommand;
+import grapeapplefruit.main.cmds.StartGame;
+import grapeapplefruit.main.evnts.JoinEvent;
+import grapeapplefruit.main.evnts.LeaveEvent;
+import org.bukkit.Bukkit;
 import org.bukkit.plugin.java.JavaPlugin;
 
 public final class Main extends JavaPlugin {
 
+    public static int pc = Bukkit.getServer().getOnlinePlayers().size();
+
     @Override
     public void onEnable() {
-        getCommand("start").setExecutor(new StartGameCommand());
-        getCommand("end").setExecutor(new EndGameCommand());
-        getCommand("basic").setExecutor(new BasicKitCommand());
-        getCommand("help").setExecutor(new HelpCommand());
-        getCommand("stone").setExecutor(new StoneKitCommand());
-        getCommand("infgui").setExecutor(new Gui());
-        getCommand("kitgui").setExecutor(new KitGui());
-        getCommand("credits").setExecutor(new CreditsCommands());
-        getServer().getPluginManager().registerEvents(new KitGuiListener(), this);
-        getServer().getPluginManager().registerEvents(new GuiListener(), this);
-        getServer().getPluginManager().registerEvents(new AllPlayersInf(), this);
-        getServer().getPluginManager().registerEvents(new InfectionHit(), this);
-        getServer().getPluginManager().registerEvents(new InfHitInf(), this);
-        System.out.println(" ====================  ");
-        System.out.println("    Infection v5.0      ");
-        System.out.println("    Gameplay Update      ");
-        System.out.println("  By GrapeAppleFruit!   ");
-        System.out.println(" ====================  ");
+        // cmds
+        getCommand("join").setExecutor(new JoinCommand());
+        getCommand("leave").setExecutor(new LeaveCommand());
+        getCommand("forcestart").setExecutor(new StartGame());
+        getCommand("plhelp").setExecutor(new HelpCommand());
+        // events
+        getServer().getPluginManager().registerEvents(new JoinEvent(), this);
+        getServer().getPluginManager().registerEvents(new LeaveEvent(), this);
+
 
     }
 
