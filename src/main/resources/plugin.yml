@@ -1,13 +1,22 @@
-name: Infection
+name: infgame
 version: '${project.version}'
 main: grapeapplefruit.main.Main
 api-version: 1.18
 commands:
   start:
-    description: Start the game!
+    description: Start the game.
     permission: op
   end:
     description: End the game.
     permission: op
   basic:
     description: Get the basic kit.
+  stone:
+    description: Get the stone kit.
+  help:
+    description: Get plugin help.
+  infgui:
+    description: Open the infection gui.
+    permission: op
+  kitgui:
+    description: Opens the kit gui.
