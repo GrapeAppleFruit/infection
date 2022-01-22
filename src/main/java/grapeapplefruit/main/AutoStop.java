@@ -3,25 +3,30 @@ package grapeapplefruit.main;
 import org.bukkit.Bukkit;
 import org.bukkit.ChatColor;
 
+import java.util.Set;
+
 public class AutoStop {
 
-    int plrs = Game.players;
-    int infp = Game.infectedp;
-    int surv = Game.survp;
-    boolean on = Game.game;
+    Set<String> inf = Game.infected;
+    int ampl = Game.playerAmount;
+    int infam = Game.infAmount;
+    boolean gmst = Game.serverStatus;
 
     public void autoStop(){
-        if (on = false){
-
-        } else if (on = true){
-            if (plrs == infp){
-                on = false;
-                Bukkit.getServer().broadcastMessage(ChatColor.GREEN + "Everyone has died to the infected.");
-                infp = infp - infp;
-                surv = surv - surv;
-            }
+        if (infam == ampl){
+            infam = infam - infam;
+            inf.clear();
+            gmst = false;
+            Bukkit.getServer().broadcastMessage(ChatColor.GREEN + "Everyone has been infected.");
         }
-    }
+        if (infam == 0){
+            infam = infam - infam;
+            inf.clear();
+            gmst = false;
+            Bukkit.getServer().broadcastMessage(ChatColor.GREEN + "The infected has left.");
+        }
 
+
+    }
 
 }

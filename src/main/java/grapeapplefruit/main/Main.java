@@ -1,34 +1,45 @@
 package grapeapplefruit.main;
 
+import grapeapplefruit.main.cmds.BasicKit;
 import grapeapplefruit.main.cmds.HelpCommand;
 import grapeapplefruit.main.cmds.JoinCommand;
-import grapeapplefruit.main.cmds.LeaveCommand;
-import grapeapplefruit.main.cmds.StartGame;
-import grapeapplefruit.main.evnts.JoinEvent;
-import grapeapplefruit.main.evnts.LeaveEvent;
+import grapeapplefruit.main.cmds.ServerStatus;
+import grapeapplefruit.main.evn.*;
 import org.bukkit.Bukkit;
 import org.bukkit.plugin.java.JavaPlugin;
+
+import java.util.HashSet;
+import java.util.Set;
 
 public final class Main extends JavaPlugin {
 
     public static int pc = Bukkit.getServer().getOnlinePlayers().size();
 
+    Set<String> inf = Game.infected;
+    int ampl = Game.playerAmount;
+    int infam = Game.infAmount;
+    boolean gmst = Game.serverStatus;
+
     @Override
     public void onEnable() {
-        // cmds
         getCommand("join").setExecutor(new JoinCommand());
-        getCommand("leave").setExecutor(new LeaveCommand());
-        getCommand("forcestart").setExecutor(new StartGame());
-        getCommand("plhelp").setExecutor(new HelpCommand());
-        // events
+        getCommand("status").setExecutor(new ServerStatus());
+        getCommand("basic").setExecutor(new BasicKit());
+        getCommand("infhelp").setExecutor(new HelpCommand());
+        getServer().getPluginManager().registerEvents(new InfectHitInfect(), this);
+        getServer().getPluginManager().registerEvents(new InfectPlayersEvent(), this);
         getServer().getPluginManager().registerEvents(new JoinEvent(), this);
         getServer().getPluginManager().registerEvents(new LeaveEvent(), this);
+        getServer().getPluginManager().registerEvents(new TabListEvent(), this);
 
 
     }
 
     @Override
     public void onDisable() {
-
+        inf.clear();
+        gmst = false;
+        ampl = 0;
+        infam = 0;
     }
 }
